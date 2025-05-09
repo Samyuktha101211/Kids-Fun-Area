@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kids Fun Area Register Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+    body {
+      font-family: 'Comic Neue', cursive;
+      background-color: #fff5e6;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #ff6f61;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ffc1c1;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ff9999;
+      color: white;
+      font-size: 1.1em;
+    }
+
+    tr:nth-child(even) {
+      background-color: #ffe5e5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registered Applications</h1>
+  
+  <table id="applications_table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Parent/Guardian Name</th>
+        <th>Child's Name</th>
+        <th>Child's Age</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+        <th>Interested Activities</th>
+        <th>Additional Information</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', showApplications);
+
+    function showApplications() {
+      const applications = JSON.parse(localStorage.getItem("applicationsData")) || [];
+      const table = document.getElementById("applications_table").getElementsByTagName('tbody')[0];
+      table.innerHTML = '';
+
+      applications.forEach((app, index) => {
+        const row = table.insertRow();
+        row.insertCell().innerText = index + 1;
+        row.insertCell().innerText = app.parentName;
+        row.insertCell().innerText = app.childName;
+        row.insertCell().innerText = app.childAge;
+        row.insertCell().innerText = app.email;
+        row.insertCell().innerText = app.phone;
+        row.insertCell().innerText = app.activities.join(", ");
+        row.insertCell().innerText = app.message || '';
+      });
+    }
+  </script>
+
+</body>
+</html>

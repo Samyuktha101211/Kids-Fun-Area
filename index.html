@@ -1,0 +1,2707 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kids Fun Area - Unconventional Learning Center</title>
+    <style>
+        /* Global Styles */
+
+        :root {
+            --primary: #ff9999;
+            /* Soft Red */
+            --secondary: #ffe5e5;
+            /* Light Red Tint */
+            --accent: #ffb3b3;
+            /* Pale Red */
+            --dark: #4d2c2c;
+            /* Dark Red-Brown */
+            --light: #fff5f5;
+            /* Very Light Red Background */
+            --success: #ffd6d6;
+            /* Gentle Rose */
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', cursive, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navigation */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+            padding: 2rem;
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        #home {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: slideInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: slideInUp 1s ease;
+        }
+
+        .cta-button {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* About Page */
+        #about {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .owner-info {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .owner-image {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .owner-image img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .owner-details {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .owner-details h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .owner-details p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .address {
+            margin-top: 3rem;
+            background-color: var(--secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .address h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Activities Page */
+        #activities {
+            text-align: center;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .activity-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .activity-card:hover .activity-image img {
+            transform: scale(1.1);
+        }
+
+        .activity-info {
+            padding: 1.5rem;
+        }
+
+        .activity-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .activity-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .activity-tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Achievements Page */
+        #achievements {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .achievements-list {
+            margin-top: 2rem;
+        }
+
+        .achievement-item {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .achievement-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .achievement-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .trophy-case {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .trophy {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .trophy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .trophy i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .trophy h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .trophy p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Page */
+        #contact {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-detail div h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .contact-detail div p {
+            color: #666;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-map {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Application Form Page */
+        #application {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .skills-group {
+            margin-top: 1rem;
+        }
+
+        .skills-checkboxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-option input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(107, 255, 107, 0.2);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .form-success i {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+            animation: bounce 1s infinite;
+        }
+
+        .form-success h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            animation: floatAround 15s infinite linear;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(50px, 50px) rotate(90deg);
+            }
+
+            50% {
+                transform: translate(100px, 0) rotate(180deg);
+            }
+
+            75% {
+                transform: translate(50px, -50px) rotate(270deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 1000;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content,
+            .owner-info {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .contact-map {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #ff9999;
+            /* Soft Red */
+            --secondary: #ffe5e5;
+            /* Light Red Tint */
+            --accent: #ffb3b3;
+            /* Pale Red */
+            --dark: #4d2c2c;
+            /* Dark Red-Brown */
+            --light: #fff5f5;
+            /* Very Light Red Background */
+            --success: #ffd6d6;
+            /* Gentle Rose */
+        }
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            margin: 0;
+            color: #3c3c3c;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: var(--primary);
+            padding: 2rem;
+            color: white;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary);
+            width: 65%;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .payment-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .welcome-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button,
+        .submit-btn,
+        .activity-tag,
+        button {
+            background-color: var(--accent) !important;
+            color: var(--dark) !important;
+        }
+
+        .cta-button:hover,
+        .submit-btn:hover,
+        button:hover {
+            background-color: var(--primary) !important;
+            color: white !important;
+        }
+
+        nav ul li a:hover,
+        .menu-toggle span {
+            background-color: var(--accent) !important;
+        }
+
+        .cta-button {
+            background-color: #fffacd !important;
+            /* Light Yellow */
+            color: var(--dark) !important;
+        }
+
+        .cta-button:hover {
+            background-color: #fdfd96 !important;
+            /* Butter Yellow */
+            color: var(--dark) !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul li a:hover,
+        .menu-toggle span {
+            background-color: #fffacd !important;
+            /* Light Yellow for menu interaction */
+            color: var(--dark) !important;
+        }
+
+        .address {
+            color: black !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"
+            style="width: 50px; height: 50px; top: 10%; left: 5%; background-color: var(--primary); border-radius: 50%;">
+        </div>
+        <div class="floating-element"
+            style="width: 80px; height: 80px; top: 70%; left: 80%; background-color: var(--secondary); border-radius: 50%;">
+        </div>
+        <div class="floating-element"
+            style="width: 60px; height: 60px; top: 30%; left: 70%; background-color: var(--accent); border-radius: 50%;">
+        </div>
+        <div class="floating-element"
+            style="width: 40px; height: 40px; top: 80%; left: 20%; background-color: var(--primary); border-radius: 50%;">
+        </div>
+        <div class="floating-element"
+            style="width: 70px; height: 70px; top: 20%; left: 40%; background-color: var(--secondary); border-radius: 50%;">
+        </div>
+    </div>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img alt="Kids Fun Area Logo" src="https://img.icons8.com/color/96/000000/children.png" />
+            <h1>Kids Fun Area</h1>
+        </div>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="nav-link active" data-page="home" href="#home">Home</a></li>
+                <li><a class="nav-link" data-page="about" href="#about">About Us</a></li>
+                <li><a class="nav-link" data-page="activities" href="#activities">Activities</a></li>
+                <li><a class="nav-link" data-page="achievements" href="#achievements">Achievements</a></li>
+                <li><a class="nav-link" data-page="contact" href="#contact">Contact</a></li>
+                <li><a class="nav-link" data-page="application" href="#application">Apply Now</a></li>
+                <li><a class="nav-link" data-page="student-portal" href="#student-portal">Student Portal</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section class="page active" id="home">
+            <div class="hero">
+                <h2>Where Learning Meets Fun!</h2>
+                <p>
+                    <marquee>Discover a world of unconventional skills and creative learning for your child at Kids Fun
+                        Area.</marquee>
+                </p>
+                <a class="cta-button" data-page="application" href="#application">Enroll Now</a>
+            </div>
+            <h2>Why Choose Kids Fun Area?</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-child"></i>
+                    <h3>Holistic Development</h3>
+                    <p>We focus on all-round development including cognitive, creative, and social skills.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Unconventional Learning</h3>
+                    <p>Unique courses that go beyond traditional education to spark creativity.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Expert Mentors</h3>
+                    <p>Our passionate instructors specialize in making learning fun and engaging.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Proven Success</h3>
+                    <p>Our students consistently excel in competitions and showcases.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Nature &amp; Mindfulness</h3>
+                    <p>Special programs to help kids connect with nature and develop calmness and focus.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Future-Ready Skills</h3>
+                    <p>Activities designed to teach adaptability, problem-solving, and digital fluency.</p>
+                </div>
+            </div>
+        </section>
+        <!-- About Page -->
+        <section class="page" id="about">
+            <h2>About Kids Fun Area</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to Kids Fun Area, where we believe that learning should be an exciting adventure! Founded
+                        in 2015, we've been dedicated to providing children with unconventional learning experiences
+                        that go beyond traditional classroom education.</p><br>
+                    <p>Our mission is to nurture creativity, curiosity, and confidence in every child through a diverse
+                        range of extracurricular activities. We've created a safe, stimulating environment where kids
+                        can explore their interests, discover new passions, and develop essential life skills.</p><br>
+                    <p>What sets us apart is our unique approach to learning. We combine fun with education, ensuring
+                        that children enjoy every moment while acquiring valuable skills. Our programs are designed to
+                        foster critical thinking, problem-solving, and self-expression.</p>
+                </div>
+                <div class="about-image">
+                    <img alt="Kids having fun at our center"
+                        src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80" />
+                </div>
+            </div>
+            <div class="owner-info">
+                <div class="owner-image">
+                    <img src="sam.jpg" alt="Samyuktha Photo">
+                </div>
+                <div class="owner-details">
+                    <h3>Meet Our Founder: Dr. Samyuktha Raja</h3>
+                    <p>Dr. Samyuktha, an educator with over 15 years of experience, founded Kids Fun Area with a vision
+                        to revolutionize how children learn. With a Master's degree in Child Psychology and a passion
+                        for creative education, she has designed our unique curriculum.</p>
+                    <p>"I believe every child is unique and learns differently. At Kids Fun Area, we celebrate these
+                        differences and provide personalized learning experiences that help each child shine."</p>
+                    <p>Samyuktha and her team of dedicated professionals are committed to making learning a joyful
+                        journey for every child who walks through our doors.</p>
+                </div>
+            </div>
+
+            <!-- Parent Testimonials Section -->
+            <section id="testimonials">
+                <h2 class="section-title"
+                    style="color: var(--primary); font-family: 'Fredoka One', cursive; text-align: center; margin: 2rem 0;">
+                    What Parents Say</h2>
+                <div class="testimonials-container" style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+                    <div class="testimonial-slider"
+                        style="position: relative; max-width: 800px; margin: 2rem auto; overflow: hidden;">
+
+                       
+                        </div>
+
+                        <div class="testimonial-slide">
+                                    <div class="testimonial-content"
+                                        style="background: var(--secondary); color: var(--dark); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;">
+                                        <p class="testimonial-text"
+                                            style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                                           The coding program is exceptional! My son built his first website at age 9 and now teaches me Python</p>
+                                        <p class="testimonial-author" style="font-weight: bold; color: var(--primary);">
+                                            - Priya Deshpande, Parent of Arjun (Age 10)</p>
+                                    </div>
+                                    <div>
+                                        <div class="testimonial-slide">
+                                    <div class="testimonial-content"
+                                        style="background: var(--secondary); color: var(--dark); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;">
+                                        <p class="testimonial-text"
+                                            style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                                           The robotics program sparked my son's interest in STEM. He now spends hours building prototypes at home and even won a school science fair!</p>
+                                        <p class="testimonial-author" style="font-weight: bold; color: var(--primary);">
+                                            - Deepika Rao, Parent of Rohan (Age 11)</p>
+                                    </div>
+                                     <div>
+                                        <div class="testimonial-slide">
+                                    <div class="testimonial-content"
+                                        style="background: var(--secondary); color: var(--dark); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;">
+                                        <p class="testimonial-text"
+                                            style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                                           The pottery class focuses on process rather than perfection, helping my child develop patience.</p>
+                                        <p class="testimonial-author" style="font-weight: bold; color: var(--primary);">
+                                            -  Michael Johnson, Parent of Sophia (Age 8)</p>
+                                    </div>
+                                    
+                                    
+                                    
+
+
+                                <div class="testimonial-slide">
+                                    <div class="testimonial-content"
+                                        style="background: var(--secondary); color: var(--dark); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;">
+                                        <p class="testimonial-text"
+                                            style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                                            We've seen remarkable improvement in our daughter's focus and discipline
+                                            since she started the chess program. It's translated to better academic
+                                            performance too!</p>
+                                        <p class="testimonial-author" style="font-weight: bold; color: var(--primary);">
+                                            - Arvind Kumar, Parent of Nitya (Age 9)</p>
+                                    </div>
+
+                                    <div class="testimonial-slide">
+                                        <div class="testimonial-content"
+                                            style="background: var(--secondary); color: var(--dark); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;">
+                                            <p class="testimonial-text"
+                                                style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                                                We're amazed by the quality of music instruction. Our daughter went from
+                                                shy singer to performing at community events in just 6 months!</p>
+                                            <p class="testimonial-author"
+                                                style="font-weight: bold; color: var(--primary);">- Vikram Singh, Parent
+                                                of Priya (Age 12)</p>
+                                        </div>
+
+                                        <div class="testimonial-slide">
+                                            <div class="testimonial-content"
+                                                style="background: var(--secondary); color: var(--dark); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;">
+                                                <p class="testimonial-text"
+                                                    style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                                                    The fusion dance classes are the perfect blend of exercise and
+                                                    cultural education. Our twins look forward to every session!</p>
+                                                <p class="testimonial-author"
+                                                    style="font-weight: bold; color: var(--primary);">- Sunita Menon,
+                                                    Parent of Tara & Mira (Age 8)</p>
+                                            </div>
+
+                                            <div class="testimonial-slide">
+                                                <div class="testimonial-content"
+                                                    style="background: var(--secondary); color: var(--dark); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;">
+                                                    <p class="testimonial-text"
+                                                        style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">
+                                                        Mad Science Lab made my reluctant learner fall in love with
+                                                        experiments. She now wants to be an astronaut - thank you for
+                                                        nurturing her curiosity!</p>
+                                                    <p class="testimonial-author"
+                                                        style="font-weight: bold; color: var(--primary);">- Rajeshwari
+                                                        Iyer, Parent of Anika (Age 10)</p>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Slider Navigation -->
+                                            <div class="slider-nav" style="text-align: center; margin-top: 1rem;">
+                                                <span class="slider-dot active"></span>
+                                                <span class="slider-dot"></span>
+                                                <span class="slider-dot"></span>
+                                                <span class="slider-dot"></span>
+                                                <span class="slider-dot"></span>
+                                                <span class="slider-dot"></span>
+                                                <span class="slider-dot"></span>
+                                                <span class="slider-dot"></span>
+                                            </div>
+                                        </div>
+            </section>
+
+            <script>
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.testimonial-slide');
+                const dots = document.querySelectorAll('.slider-dot');
+
+                function showSlide(n) {
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    dots.forEach(dot => dot.classList.remove('active'));
+
+                    currentSlide = (n + slides.length) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => showSlide(index));
+                });
+
+                setInterval(() => {
+                    showSlide(currentSlide + 1);
+                }, 5000);
+            </script>
+            <div class="address">
+                <h3>Our Center</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Imagination Street, Creativity City, CC 56789</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@kidsfunarea.com</p>
+                <p>Our state-of-the-art facility spans 10,000 square feet with specialized areas for each activity,
+                    outdoor play spaces, and a cozy reading nook. We maintain small class sizes to ensure personalized
+                    attention for every child.</p>
+            </div>
+        </section>
+        <!-- Activities Page -->
+        <section class="page" id="activities">
+            <h2>Our Exciting Activities</h2><br />
+            <p>Explore our wide range of unconventional learning programs designed to spark creativity and joy in every
+                child.</p>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            alt="Kids Coding">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Cosmic Coding</h3>
+                        <p>Blast off into programming with fun projects like creating your own video game or animating a
+                            space adventure.</p>
+                        <span class="activity-tag">Tech Skills</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="cl.jpg" alt="Pottery Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Galactic Clay</h3>
+                        <p>Sculpt alien worlds and futuristic creations while developing fine motor skills and spatial
+                            reasoning.</p>
+                        <span class="activity-tag">Creative Arts</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="p.jpg" alt="Painting Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Starry Studio</h3>
+                        <p>Explore painting techniques from watercolor galaxies to digital art on tablets.</p>
+                        <span class="activity-tag">Creative Arts</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="m.webp" alt="Music Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Music Nebula</h3>
+                        <p>Journey through musical traditions from Carnatic ragas to electronic beats and everything
+                            between.</p>
+                        <span class="activity-tag">Performing Arts</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="d.jpg" alt="Dance Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Dance Dimension</h3>
+                        <p>From classical forms to hip-hop, express yourself through movement in our zero-gravity dance
+                            studio.</p>
+                        <span class="activity-tag">Performing Arts</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            alt="Robotics Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Robot Explorers</h3>
+                        <p>Build and program robots to complete intergalactic missions while learning engineering
+                            basics.</p>
+                        <span class="activity-tag">STEM</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="s.png" alt="Science Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Science Odyssey</h3>
+                        <p>Conduct mind-blowing experiments that make physics, chemistry and biology irresistibly fun.
+                        </p>
+                        <span class="activity-tag">STEM</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="c.webp" alt="Chess Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Chess Cosmos</h3>
+                        <p>Master strategic thinking through our innovative approach to this ancient game of kings.</p>
+                        <span class="activity-tag">Cognitive Skills</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="yoga.jpg" alt="Yoga Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Yoga Orbit</h3>
+                        <p>Develop mindfulness and flexibility through cosmic-themed yoga adventures.</p>
+                        <span class="activity-tag">Wellness</span>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            alt="Cooking Class">
+                    </div>
+                    <div class="activity-info">
+                        <h3>Culinary Comets</h3>
+                        <p>Explore world cuisines while learning nutrition science and kitchen safety.</p>
+                        <span class="activity-tag">Life Skills</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- Achievements Page -->
+        <section class="page" id="achievements">
+            <h2>Our Achievements</h2>
+            <p>We're proud of our students' accomplishments and the recognition our center has received.</p>
+            <div class="achievements-list">
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>National Coding Champions 2023</h3>
+                        <p>Our students won first place in the Junior Coders National Competition with their innovative
+                            game design.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Regional Art Exhibition Winners</h3>
+                        <p>Three of our pottery students had their work selected for the prestigious Young Artists
+                            Gallery.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Best Innovative Learning Center 2022</h3>
+                        <p>Recognized by the Education Excellence Foundation for our unconventional teaching methods.
+                        </p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>State Music Competition</h3>
+                        <p>Our Carnatic music ensemble received the "Most Promising Young Talent" award.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Robotics League Finalists</h3>
+                        <p>Our junior robotics team placed in the top 5 at the National Robotics Challenge.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Chess Prodigies</h3>
+                        <p>Two of our students achieved state-level rankings in their age categories.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Young Picasso Award</h3>
+                        <p>One of our painting students won this prestigious art scholarship.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-drum"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Percussion Excellence</h3>
+                        <p>Our Western music students formed a band that performed at the City Cultural Festival.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Young Scientist Award</h3>
+                        <p>A Mad Science student won for her innovative water purification project.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <h3>Junior MasterChef Contestant</h3>
+                        <p>One of our Little Chefs was selected for the popular cooking show.</p>
+                    </div>
+                </div>
+            </div>
+            <h3 style="margin-top: 3rem;">Our Trophy Case</h3>
+            <div class="trophy-case">
+                <div class="trophy">
+                    <i class="fas fa-trophy"></i>
+                    <h4>Innovation in Education</h4>
+                    <p>2023 Award for Creative Teaching Methods</p>
+                </div>
+                <div class="trophy">
+                    <i class="fas fa-medal"></i>
+                    <h4>Community Impact</h4>
+                    <p>City Council Recognition 2022</p>
+                </div>
+                <div class="trophy">
+                    <i class="fas fa-award"></i>
+                    <h4>Safety Excellence</h4>
+                    <p>5-Star Child Safety Certification</p>
+                </div>
+                <div class="trophy">
+                    <i class="fas fa-star"></i>
+                    <h4>Parent's Choice</h4>
+                    <p>Voted Best Learning Center 3 years running</p>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Page -->
+        <section class="page" id="contact">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you! Reach out for more information or to schedule a visit.</p>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Imagination Street, Creativity City, CC 56789</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+971557459650</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@kidsfunarea.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Hours</h4>
+                            <p>Monday-Friday: 9am - 6pm<br />Saturday: 10am - 4pm<br />Sunday: Closed</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <iframe allowfullscreen="" loading="lazy"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215373510575!2d-73.987844924525!3d40.7484409713896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ0JzU0LjQiTiA3M8KwNTknMTQuMiJX!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"></iframe>
+                </div>
+            </div>
+        </section>
+        <!-- Application Form Page -->
+
+
+        <section class="page" id="application">
+            <h2>Enroll Your Child</h2>
+            <p>Fill out this form to register your child for our exciting programs.</p>
+            <div class="form-container">
+                <form id="enrollment-form">
+                    <div class="form-group">
+                        <label for="parent-name">Parent/Guardian Name</label>
+                        <input id="parent-name" name="parent-name" required="" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="child-name">Child's Name</label>
+                        <input id="child-name" name="child-name" required="" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="child-age">Child's Age</label>
+                        <input id="child-age" max="16" min="3" name="child-age" required="" type="number" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input id="email" name="email" required="" type="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input id="phone" name="phone" required="" type="tel" />
+                    </div>
+                    <div class="form-group">
+                        <label>Interested Activities (Select multiple)</label>
+                        <div class="skills-checkboxes">
+                            <div class="skill-option">
+                                <input id="coding" name="skills" type="checkbox" value="coding" />
+                                <label for="coding">Creative Coding</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="pottery" name="skills" type="checkbox" value="pottery" />
+                                <label for="pottery">Pottery &amp; Clay Art</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="painting" name="skills" type="checkbox" value="painting" />
+                                <label for="painting">Expressive Painting</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="music" name="skills" type="checkbox" value="music" />
+                                <label for="music">Music Exploration</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="dance" name="skills" type="checkbox" value="dance" />
+                                <label for="dance">Dance Fusion</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="robotics" name="skills" type="checkbox" value="robotics" />
+                                <label for="robotics">Junior Robotics</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="science" name="skills" type="checkbox" value="science" />
+                                <label for="science">Mad Science</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="chess" name="skills" type="checkbox" value="chess" />
+                                <label for="chess">Chess Masters</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="yoga" name="skills" type="checkbox" value="yoga" />
+                                <label for="yoga">Kids Yoga</label>
+                            </div>
+                            <div class="skill-option">
+                                <input id="cooking" name="skills" type="checkbox" value="cooking" />
+                                <label for="cooking">Little Chefs</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message"
+                            placeholder="Any special requirements or notes..."></textarea>
+                    </div>
+                    <button class="submit-btn" type="submit">Submit Application</button>
+                </form>
+
+                <div class="form-success" id="form-success">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Application Submitted!</h3>
+                    <p>Thank you for your interest in Kids Fun Area. We'll contact you within 2 business days to
+                        complete the enrollment process.</p>
+                </div>
+            </div>
+
+            <script>
+
+                function saveApplicationData(event) {
+                    event.preventDefault();
+
+                    const parentName = document.getElementById("parent-name").value;
+                    const childName = document.getElementById("child-name").value;
+                    const childAge = document.getElementById("child-age").value;
+                    const email = document.getElementById("email").value;
+                    const phone = document.getElementById("phone").value;
+                    const message = document.getElementById("message").value;
+
+                    // Get selected activities
+                    const activityCheckboxes = document.querySelectorAll('input[name="skills"]:checked');
+                    const activities = Array.from(activityCheckboxes).map(cb => cb.value);
+
+                    const applications = JSON.parse(localStorage.getItem("applicationsData")) || [];
+                    applications.push({
+                        parentName,
+                        childName,
+                        childAge,
+                        email,
+                        phone,
+                        activities,
+                        message
+                    });
+
+                    localStorage.setItem("applicationsData", JSON.stringify(applications));
+
+                    alert("Application submitted successfully!");
+                    event.target.reset();
+                }
+
+                document.getElementById("enrollment-form").addEventListener("submit", saveApplicationData);
+            </script>
+
+        </section>
+
+
+
+
+        <section class="page" id="student-portal">
+            <!-- Login Screen -->
+            <div class="login-container" id="loginScreen">
+                <h2>Student Portal Login</h2>
+                <form id="loginForm">
+                    <input type="text" id="loginStudentId" placeholder="Student ID" required>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <button type="submit" class="submit-btn">Login</button>
+                    <p class="toggle-form">Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+                </form>
+            </div>
+
+            <!-- Register Screen -->
+            <div class="login-container" id="registerScreen" style="display: none;">
+                <h2>Student Registration</h2>
+                <form id="registerForm">
+                    <input type="text" id="regName" placeholder="Full Name" required>
+                    <input type="text" id="regStudentId" placeholder="Student ID" required>
+                    <input type="email" id="regEmail" placeholder="Email" required>
+                    <input type="password" id="regPassword" placeholder="Password" required>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+                    <button type="submit" class="submit-btn">Register</button>
+                    <p class="toggle-form">Already have an account? <a href="#" id="showLogin">Login here</a></p>
+                </form>
+            </div>
+
+
+        </section>
+
+
+        <style>
+            .login-container {
+                max-width: 400px;
+                margin: 2rem auto;
+                padding: 2rem;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .login-container h2 {
+                color: var(--primary);
+                margin-bottom: 1.5rem;
+                text-align: center;
+            }
+
+            .login-container input {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 1rem;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+            .toggle-form {
+                margin-top: 1rem;
+                text-align: center;
+            }
+
+            .toggle-form a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            .toggle-form a:hover {
+                text-decoration: underline;
+            }
+        </style>
+
+
+
+
+        <!-- Dashboard -->
+        <div id="dashboard" style="display: none;">
+            <div class="dashboard-layout">
+                <div class="sidebar">
+                    <h2>Kids Fun Area</h2><br />
+                    <nav>
+                        <p><i class="fas fa-home"></i> Dashboard</p><br>
+                        <p><i class="fas fa-tasks"></i> Activities</p><br>
+                        <p><i class="fas fa-file-alt"></i> Assignments</p><br>
+                        <p><i class="fas fa-wallet"></i> Payments</p><br>
+                        <button onclick="logout()" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </nav>
+                </div>
+                <div class="main-content">
+                    <div class="welcome-header">
+                        <h1>Welcome Back, Reshmitha! 👋</h1>
+                        <p>Let's continue the learning adventure!</p>
+                    </div>
+                    <div class="activity-grid">
+                        <!-- Current Activities Card -->
+                        <div class="card">
+                            <h3><i class="fas fa-running"></i> Current Activities</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>📝 Creative Writing Workshop</li>
+                                <li>🧪 Science Discovery Lab</li>
+                                <li>🎨 Digital Art Class</li>
+                            </ul>
+                        </div>
+                        <!-- Assignments Card -->
+                        <div class="card">
+                            <h3><i class="fas fa-clipboard-list"></i> This Week's Tasks</h3><br />
+                            <div class="assignment-item">
+                                <h4>Monday: Story Development</h4>
+                                <p>Complete chapter 1 draft</p><br />
+                                <button onclick="showWorkModal()">Submit Work</button><br />
+                            </div>
+                            <div class="assignment-item"><br />
+                                <h4>Wednesday: Science Report</h4>
+                                <p>Document 3 experiment findings</p><br />
+                                <button onclick="showWorkModal()">Submit Work</button><br />
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-credit-card"></i> Payment Center</h3>
+                            <p>Current Balance: $150.00</p><br />
+                            <button onclick="showPayment()">Make Payment</button>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- 📘 START OF EXTENDED COURSE DASHBOARD -->
+                    <div class="card">
+                        <h3><i class="fas fa-book-reader"></i> Your Courses</h3>
+                        <div class="activity-grid">
+                            <!-- Creative Coding -->
+                            <div class="card">
+                                <h4>🎮 Creative Coding Galaxy</h4><br>
+                                <p>Progress: ⭐⭐</p>
+                                <p>Learn to animate, game design, and code with Scratch and block programming.</p><br>
+                                <button onclick="toggleCourseContent('coding')">Continue Course</button><br>
+                                <div id="course-coding" class="course-content" style="display: none;"><br>
+                                    <h5>📘 Notes</h5><iframe
+                                        src="file:///C:/Users/Admin/Desktop/Digital%20Fests/Digital%20Fest%202025-2026/Introduction%20to%20VPL%20in%20Scratch%20Programming.pdf"
+                                        frameborder="0" width="100%" height="300px" allowfullscreen></iframe><br />
+                                    <p>Scratch lets you build interactive stories and games using blocks like "Move 10
+                                        steps", "When clicked", etc.</p><br>
+                                    <h5>📝 Quizzes</h5><br>
+                                    <form onsubmit="return checkQuiz('codingQ1', 'B', 'codingR1')">
+                                        <p>Q1: What block makes a sprite move?</p><br>
+                                        <select id="codingQ1">
+                                            <option value="">Select</option>
+                                            <option value="A">When clicked</option>
+                                            <option value="B">Move 10 steps</option>
+                                            <option value="C">Say Hello</option>
+
+                                        </select>
+                                        <p id="codingR1"></p><br>
+
+                                        <button type="submit">Submit</button><br>
+                                        
+                                    </form>
+                                    <form onsubmit="return checkQuiz('codingQ2', 'C', 'codingR2')">
+                                        <p>Q2: What block is used to start scripts?</p><br>
+                                        <select id="codingQ2">
+                                            <option value="">Select</option>
+                                            <option value="A">Glide</option>
+                                            <option value="B">Repeat</option>
+                                            <option value="C">When green flag clicked</option><br>
+                                        </select>
+                                        <p id="codingR2"></p><br>
+                                        <button type="submit">Submit</button><br>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Science Lab -->
+                            <div class="card">
+                                <h4>🧪 Science Explorers Lab</h4><br>
+                                <p>Progress: ⭐</p><br>
+                                <p>Hands-on experiments in physics, chemistry and biology.</p><br>
+                                <button onclick="toggleCourseContent('science')">Continue Course</button><br>
+                                <div id="course-science" class="course-content" style="display: none;">
+                                    <h5>📘 Notes</h5><iframe
+                                        src="file:///C:/Users/Admin/Desktop/Digital%20Fests/Digital%20Fest%202025-2026/Welcome-to-Science-Explorers-Lab.pdf"
+                                        frameborder="0" width="100%" height="300px" allowfullscreen></iframe><br /><br>
+                                    <p>Experiments help understand scientific concepts like density, reactions, and
+                                        forces.</p><br>
+                                    <h5>📝 Quizzes</h5><br>
+                                    <form onsubmit="return checkQuiz('scienceQ1', 'A', 'scienceR1')">
+                                        <p>Q1: What happens when vinegar mixes with baking soda?</p><br>
+                                        <select id="scienceQ1">
+                                            <option value="">Select</option>
+                                            <option value="A">Fizzing reaction</option>
+                                            <option value="B">Melts</option>
+                                            <option value="C">Nothing</option>
+                                        </select>
+                                        <p id="scienceR1"></p><br>
+                                        <button type="submit">Submit</button><br>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Artistic Universe -->
+                            <div class="card">
+                                <h4>🎨 Artistic Universe</h4><br>
+                                <p>Progress: ⭐⭐</p><br>
+                                <p>Explore painting, drawing and digital art adventures.</p><br>
+                                <button onclick="toggleCourseContent('art')">Continue Course</button><br>
+                                <div id="course-art" class="course-content" style="display: none;">
+                                    <h5>📘 Notes</h5><iframe
+                                        src="file:///C:/Users/Admin/Desktop/Digital%20Fests/Digital%20Fest%202025-2026/Artistic%20Universe-%20Expressing%20Creativity%20Through%20Art.pdf"
+                                        frameborder="0" width="100%" height="300px" allowfullscreen></iframe><br />
+                                    <p>Colors, shapes and lines help express emotion and creativity in artworks.</p><br>
+                                    <h5>📝 Quizzes</h5><br>
+                                    <form onsubmit="return checkQuiz('artQ1', 'B', 'artR1')">
+                                        <p>Q1: What color do you get by mixing blue and yellow?</p><br>
+                                        <select id="artQ1">
+                                            <option value="">Select</option>
+                                            <option value="A">Red</option>
+                                            <option value="B">Green</option>
+                                            <option value="C">Purple</option>
+                                        </select>
+                                        <p id="artR1"></p><br>
+                                        <button type="submit">Submit</button><br>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Robotics -->
+                            <div class="card">
+                                <h4>🤖 Robotics Mission Control</h4><br>
+                                <p>Progress: ⭐</p><br>
+                                <p>Build and program robots to tackle fun missions and challenges.</p><br>
+                                <button onclick="toggleCourseContent('robotics')">Continue Course</button><br>
+                                <div id="course-robotics" class="course-content" style="display: none;">
+                                    <h5>📘 Notes</h5><iframe
+                                        src="file:///C:/Users/Admin/Desktop/Digital%20Fests/Digital%20Fest%202025-2026/Understanding%20Robotics%20Mission%20Control%20Systems.pdf"
+                                        frameborder="0" width="100%" height="300px" allowfullscreen></iframe><br />
+                                    <p>Robots follow code instructions to perform tasks. Sensors and motors are key
+                                        parts.</p><br>
+                                    <h5>📝 Quizzes</h5><br>
+                                    <form onsubmit="return checkQuiz('roboticsQ1', 'C', 'roboticsR1')">
+                                        <p>Q1: What does a motor do in a robot?</p><br>
+                                        <select id="roboticsQ1">
+                                            <option value="">Select</option>
+                                            <option value="A">Think</option>
+                                            <option value="B">Sense</option>
+                                            <option value="C">Move</option>
+                                        </select>
+                                        <p id="roboticsR1"></p><br>
+                                        <button type="submit">Submit</button><br>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Yoga -->
+                            <div class="card">
+                                <h4>🧘 Mindful Yoga Orbit</h4><br>
+                                <p>Progress: ⭐</p><br>
+                                <p>Practice movement, mindfulness and breathing in playful sessions.</p><br>
+                                <button onclick="toggleCourseContent('yoga')">Continue Course</button><br>
+                                <div id="course-yoga" class="course-content" style="display: none;">
+                                    <h5>📘 Notes</h5><iframe src="file:///C:/Users/Admin/Desktop/Digital%20Fests/Digital%20Fest%202025-2026/Welcome-to-Mindful-Yoga-Orbit.pdf" width="100%" height="600" allowfullscreen></iframe>
+
+                                
+                                        <frameborder="0" width="100%" height="300px" allowfullscreen></iframe><br />
+                                    <p>Yoga builds focus, flexibility and calmness through breathing and movement.</p>
+                                    <br>
+                                    <h5>📝 Quizzes</h5><br>
+                                    <form onsubmit="return checkQuiz('yogaQ1', 'B', 'yogaR1')">
+                                        <p>Q1: Which is a yoga pose?</p><br>
+                                        <select id="yogaQ1">
+                                            <option value="">Select</option>
+                                            <option value="A">Chicken stance</option>
+                                            <option value="B">Tree pose</option>
+                                            <option value="C">Flying twist</option>
+                                        </select>
+                                        <p id="yogaR1"></p><br>
+                                        <button type="submit">Submit</button><br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 🏅 START OF PROGRESS & BADGES TRACKING -->
+                    <div class="card">
+                        <h3><i class="fas fa-medal"></i> Your Progress & Badges</h3>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <div class="card">
+                                <h4>🎮 Creative Coding</h4><br>
+                                <p>Progress: <progress value="80" max="100"></progress> 80%</p>
+                                <p>Badges Earned: <span>🌟 Scratch Star</span> <span>👾 Game Guru</span></p>
+                            </div>
+                            <div class="card">
+                                <h4>🧪 Science Lab</h4><br>
+                                <p>Progress: <progress value="60" max="100"></progress> 60%</p>
+                                <p>Badges Earned: <span>🔬 Experiment Expert</span></p>
+                            </div>
+                            <div class="card">
+                                <h4>🎨 Artistic Universe</h4><br>
+                                <p>Progress: <progress value="90" max="100"></progress> 90%</p>
+                                <p>Badges Earned: <span>🎨 Paint Prodigy</span></p>
+                            </div>
+                            <div class="card">
+                                <h4>🤖 Robotics</h4><br>
+                                <p>Progress: <progress value="40" max="100"></progress> 40%</p>
+                                <p>Badges Earned: <span>⚙️ Robot Rookie</span></p>
+                            </div>
+                            <div class="card">
+                                <h4>🧘 Yoga Orbit</h4><br>
+                                <p>Progress: <progress value="50" max="100"></progress> 50%</p>
+                                <p>Badges Earned: <span>🧘 Calm Master</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 🏅 END OF PROGRESS & BADGES TRACKING -->
+                    <!-- 📘 END OF EXTENDED COURSE DASHBOARD -->
+
+                    <script>
+                        function checkQuiz(selectId, correctAnswer, resultId) {
+                            const selected = document.getElementById(selectId).value;
+                            const result = document.getElementById(resultId);
+                            if (selected === correctAnswer) {
+                                result.textContent = '✅ Correct!';
+                                result.style.color = 'green';
+                            } else {
+                                result.textContent = '❌ Try again!';
+                                result.style.color = 'red';
+                            }
+                            return false;
+                        }
+
+                        function toggleCourseContent(id) {
+                            const element = document.getElementById('course-' + id);
+                            if (element.style.display === 'none') {
+                                element.style.display = 'block';
+                            } else {
+                                element.style.display = 'none';
+                            }
+                        }
+                    </script>
+
+
+                    <script>
+                        function checkQuiz(selectId, correctAnswer, resultId) {
+                            const selected = document.getElementById(selectId).value;
+                            const result = document.getElementById(resultId);
+                            if (selected === correctAnswer) {
+                                result.textContent = '✅ Correct!';
+                                result.style.color = 'green';
+                            } else {
+                                result.textContent = '❌ Try again!';
+                                result.style.color = 'red';
+                            }
+                            return false;
+                        }
+
+                        function toggleCourseContent(id) {
+                            const element = document.getElementById('course-' + id);
+                            if (element.style.display === 'none') {
+                                element.style.display = 'block';
+                            } else {
+                                element.style.display = 'none';
+                            }
+                        }
+                    </script>
+
+
+
+                    <!-- 🧠 START OF PROGRESS & QUIZ TRACKING -->
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Your Progress & Quizzes</h3>
+                        <div id="quiz-progress-grid"
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+
+                            <!-- Example Quiz for Creative Coding Galaxy -->
+                            <div class="card">
+                                <h4>🎮 Creative Coding Quiz</h4><br>
+                                <form onsubmit="return checkQuiz('codingAnswer', 'B', 'codingResult')">
+                                    <p>In a drawing program, the code below is meant to draw a spinning star:</p><br>
+                                    <p><b>for i in range(5):</b></p>
+                                    <p><b>draw_star()</b></p>
+                                    <p><b>rotate(72)</b></p>
+
+                                    <select id="codingAnswer">
+                                        <option value="">Select an answer</option><br>
+                                        <option value="A">The angle of rotation is incorrect</option>
+                                        <option value="B">The star is not being drawn at the center</option>
+                                        <option value="C">The loop should be range(10)</option>
+                                        <option value="D">The background is not being cleared</option>
+                                    </select><br>
+                                    <br /><br />
+                                    <button type="submit">Submit Quiz</button><br>
+                                    <p id="codingResult"></p>
+                                </form>
+                            </div>
+
+                            <!-- Progress Tracker (placeholder) -->
+                            <div class="card">
+                                <h4>🏅 Your Stars</h4><br>
+                                <p>✨ Creative Coding: ⭐⭐</p>
+                                <p>🧪 Science Lab: ⭐</p>
+                                <p>🎨 Artistic Universe: ⭐⭐</p><br>
+                                <p>More coming soon...</p>
+                            </div>
+
+                            <!-- Report Card Download -->
+                            <div class="card">
+                                <h4>📄 Download Report Card</h4><br>
+                                <p>Coming soon: Personalized downloadable PDF reports for each student with course
+                                    summaries and achievements!</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- 🧠 END OF PROGRESS & QUIZ TRACKING -->
+
+                    <script>
+                        function checkQuiz(selectId, correctAnswer, resultId) {
+                            const selected = document.getElementById(selectId).value;
+                            const result = document.getElementById(resultId);
+                            if (selected === correctAnswer) {
+                                result.textContent = '✅ Correct! Great job!';
+                                result.style.color = 'green';
+                            } else {
+                                result.textContent = '❌ Oops! Try again.';
+                                result.style.color = 'red';
+                            }
+                            return false;
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- Payment Modal -->
+        <div class="payment-modal" id="paymentModal" style="display: none;">
+            <h2>Payment Options</h2>
+            <div class="payment-method">
+                <div class="payment-option">
+                    <h4><i class="fab fa-cc-visa"></i> Credit/Debit Card</h4>
+                    <input placeholder="Card Number" type="text" />
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input placeholder="MM/YY" type="text" />
+                        <input placeholder="CVV" type="text" />
+                    </div>
+                </div>
+                <div class="payment-option" style="margin: 2rem 0;">
+                    <h4><i class="fab fa-paypal"></i> PayPal</h4>
+                    <button style="background: #003087;"><i class="fab fa-paypal"></i> Pay with PayPal</button>
+                </div>
+                <button onclick="hidePayment()">Close</button>
+            </div>
+        </div>
+        <!-- Work Submission Modal -->
+        <div class="payment-modal" id="workModal" style="display: none;">
+            <h2>Submit Your Work</h2>
+            <input id="fileUpload" type="file" />
+            <button onclick="submitWork()">Submit</button>
+            <button onclick="hideWorkModal()">Close</button>
+        </div>
+        <script>
+            
+            function login() {
+                const studentId = document.getElementById('studentId').value;
+                const password = document.getElementById('password').value;
+
+                if (studentId === '1543' && password === '1234') {
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    return false;
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                    return false;
+                }
+            }
+
+            function showPayment() {
+                if (!document.querySelector('.overlay')) {
+                    document.body.insertAdjacentHTML('beforeend', '<div class="overlay"></div>');
+                }
+                document.getElementById('paymentModal').style.display = 'block';
+            }
+
+            function hidePayment() {
+                document.getElementById('paymentModal').style.display = 'none';
+                const overlay = document.querySelector('.overlay');
+                if (overlay) overlay.remove();
+            }
+
+            function showWorkModal() {
+                if (!document.querySelector('.overlay')) {
+                    document.body.insertAdjacentHTML('beforeend', '<div class="overlay"></div>');
+                }
+                document.getElementById('workModal').style.display = 'block';
+            }
+
+            function hideWorkModal() {
+                document.getElementById('workModal').style.display = 'none';
+                const overlay = document.querySelector('.overlay');
+                if (overlay) overlay.remove();
+            }
+
+            function submitWork() {
+                const file = document.getElementById('fileUpload').files[0];
+                if (file) {
+                    alert(`🎉 ${file.name} submitted successfully!`);
+                    hideWorkModal();
+                } else {
+                    alert('Please select a file before submitting.');
+                }
+            }
+        </script>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Kids Fun Area</h3>
+                <p>We're dedicated to providing unconventional learning experiences that spark creativity, curiosity,
+                    and confidence in children ages 3-16.</p>
+                <p>Founded in 2015, we've helped over 2,000 children discover their passions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a data-page="home" href="#home">Home</a></li>
+                    <li><a data-page="about" href="#about">About Us</a></li>
+                    <li><a data-page="activities" href="#activities">Activities</a></li>
+                    <li><a data-page="achievements" href="#achievements">Achievements</a></li>
+                    <li><a data-page="contact" href="#contact">Contact</a></li>
+                    <li><a data-page="application" href="#application">Apply Now</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates on new programs and special events.</p>
+                <form class="newsletter-form">
+                    <input placeholder="Your Email" required="" type="email" />
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 Kids Fun Area. All Rights Reserved. | Designed with <i class="fas fa-heart"
+                    style="color: var(--primary);"></i> for creative minds</p>
+        </div>
+    </footer>
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        // Page Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // Get the target page from data attribute
+                const targetPage = link.getAttribute('data-page');
+
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                // Show target page
+                document.getElementById(targetPage).classList.add('active');
+
+                // Update active nav link
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                link.classList.add('active');
+
+                // Close mobile menu if open
+                if (nav.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    nav.classList.remove('active');
+                }
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Form Submission
+        const enrollmentForm = document.getElementById('enrollment-form');
+        const formSuccess = document.getElementById('form-success');
+
+        enrollmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Here you would typically send the form data to a server
+            // For this demo, we'll just show the success message
+            enrollmentForm.style.display = 'none';
+            formSuccess.style.display = 'block';
+
+            // Reset form after 5 seconds (for demo purposes)
+            setTimeout(() => {
+                enrollmentForm.reset();
+                enrollmentForm.style.display = 'block';
+                formSuccess.style.display = 'none';
+            }, 5000);
+        });
+
+        // Add floating elements dynamically
+        const floatingElements = document.querySelector('.floating-elements');
+        const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)'];
+        const shapes = ['circle', 'square', 'triangle'];
+
+        for (let i = 0; i < 10; i++) {
+            const element = document.createElement('div');
+            const size = Math.random() * 50 + 20;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 5;
+
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            element.style.backgroundColor = color;
+            element.style.top = `${top}%`;
+            element.style.left = `${left}%`;
+            element.style.animationDuration = `${duration}s`;
+            element.style.animationDelay = `${delay}s`;
+
+            if (shape === 'circle') {
+                element.style.borderRadius = '50%';
+            } else if (shape === 'triangle') {
+                element.style.backgroundColor = 'transparent';
+                element.style.borderLeft = `${size / 2}px solid transparent`;
+                element.style.borderRight = `${size / 2}px solid transparent`;
+                element.style.borderBottom = `${size}px solid ${color}`;
+                element.style.width = '0';
+                element.style.height = '0';
+            }
+
+            element.classList.add('floating-element');
+            floatingElements.appendChild(element);
+        }
+
+        // Add animation to feature cards on scroll
+        const featureCards = document.querySelectorAll('.feature-card');
+
+        function checkScroll() {
+            featureCards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Set initial state
+        featureCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        });
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+    </script>
+    <script>
+        function login() {
+            const studentId = document.getElementById('studentId').value;
+            const password = document.getElementById('password').value;
+
+            if (studentId === '1543' && password === '1234') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                return false;
+            } else {
+                alert('Invalid credentials. Please try again.');
+                return false;
+            }
+        }
+
+        function showPayment() {
+            if (!document.querySelector('.overlay')) {
+                document.body.insertAdjacentHTML('beforeend', '<div class="overlay"></div>');
+            }
+            document.getElementById('paymentModal').style.display = 'block';
+        }
+
+        function hidePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+            const overlay = document.querySelector('.overlay');
+            if (overlay) overlay.remove();
+        }
+
+        function showWorkModal() {
+            if (!document.querySelector('.overlay')) {
+                document.body.insertAdjacentHTML('beforeend', '<div class="overlay"></div>');
+            }
+            document.getElementById('workModal').style.display = 'block';
+        }
+
+        function hideWorkModal() {
+            document.getElementById('workModal').style.display = 'none';
+            const overlay = document.querySelector('.overlay');
+            if (overlay) overlay.remove();
+        }
+
+        function submitWork() {
+            const file = document.getElementById('fileUpload').files[0];
+            if (file) {
+                alert(`🎉 ${file.name} submitted successfully!`);
+                hideWorkModal();
+            } else {
+                alert('Please select a file before submitting.');
+            }
+        }
+    </script>
+    <script>
+        // Initialize students array properly in localStorage
+        function initializeStudents() {
+        // Initialize students array in localStorage if it doesn't exist
+        if (!localStorage.getItem('students')) {
+            localStorage.setItem('students', JSON.stringify([]));
+        }
+        }
+        // Check if student is already logged in on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                initializeStudents();
+
+                const currentStudent = sessionStorage.getItem('currentStudent');
+                if (currentStudent) {
+                    loginScreen.style.display = 'none';
+                    dashboard.style.display = 'block';
+                    const student = JSON.parse(currentStudent);
+                    document.querySelector('.welcome-header h1').textContent = `Welcome back, ${student.name}!`;
+                }
+            } catch (error) {
+                console.error('Error initializing student portal:', error);
+                // Reset corrupted data
+                localStorage.setItem('students', JSON.stringify([]));
+                sessionStorage.removeItem('currentStudent');
+            }
+        });
+
+        // Call this when the page loads
+        initializeStudents();
+        // Initialize students array in localStorage if it doesn't exist
+        if (!localStorage.getItem('students')) {
+            localStorage.setItem('students', JSON.stringify([]));
+        }
+
+        // DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginScreen = document.getElementById('loginScreen');
+        const registerScreen = document.getElementById('registerScreen');
+        const dashboard = document.getElementById('dashboard');
+        const showRegisterLink = document.getElementById('showRegister');
+        const showLoginLink = document.getElementById('showLogin');
+
+        // Toggle between login and register forms
+        showRegisterLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginScreen.style.display = 'none';
+            registerScreen.style.display = 'block';
+        });
+
+        showLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerScreen.style.display = 'none';
+            loginScreen.style.display = 'block';
+        });
+
+        // Handle registration
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('regName').value;
+            const studentId = document.getElementById('regStudentId').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+            // Validation
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Safely get students from localStorage
+            let students = JSON.parse(localStorage.getItem('students'));
+            if (!students || !Array.isArray(students)) {
+                students = [];
+            }
+
+            // Check if student already exists
+            const existingStudent = students.find(student => student.studentId === studentId);
+
+            if (existingStudent) {
+                alert('Student ID already exists!');
+                return;
+            }
+
+            // Create new student object
+            const newStudent = {
+                name,
+                studentId,
+                email,
+                password,
+                courses: [],
+                progress: {}
+            };
+
+            // Save to localStorage
+            students.push(newStudent);
+            localStorage.setItem('students', JSON.stringify(students));
+
+            alert('Registration successful! Please login.');
+            registerForm.reset();
+            registerScreen.style.display = 'none';
+            loginScreen.style.display = 'block';
+        });
+
+        // Handle login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const studentId = document.getElementById('loginStudentId').value;
+            const password = document.getElementById('loginPassword').value;
+
+
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+
+            if (!Array.isArray(students)) {
+                console.error('Students data is corrupted, resetting...');
+                localStorage.setItem('students', JSON.stringify([]));
+                alert('System error occurred. Please try again.');
+                return;
+            }
+
+            const student = students.find(student =>
+                student.studentId === studentId && student.password === password
+            );
+
+            if (student) {
+
+                sessionStorage.setItem('currentStudent', JSON.stringify(student));
+
+                // Show dashboard
+                loginScreen.style.display = 'none';
+                dashboard.style.display = 'block';
+
+                // Update welcome message
+                document.querySelector('.welcome-header h1').textContent = `Welcome, ${student.name}!`;
+            } else {
+                alert('Invalid credentials! Please try again.');
+            }
+        });
+
+        // Check if student is already logged in on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const currentStudent = sessionStorage.getItem('currentStudent');
+            if (currentStudent) {
+                loginScreen.style.display = 'none';
+                dashboard.style.display = 'block';
+                const student = JSON.parse(currentStudent);
+                document.querySelector('.welcome-header h1').textContent = `Welcome back, ${student.name}!`;
+            }
+        });
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('currentStudent');
+            dashboard.style.display = 'none';
+            loginScreen.style.display = 'block';
+            loginForm.reset();
+        }
+        console.log("ytffjygvkh");
+
+    </script>
+</body>
+
+</html>
